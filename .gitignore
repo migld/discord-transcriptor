@@ -1,0 +1,16 @@
+# Scala / sbt
+target/
+.bsp/
+.metals/
+.idea/
+*.class
+*.jar
+
+# Node / React
+node_modules/
+dist/
+.env
+
+# OS
+.DS_Store
+Thumbs.db

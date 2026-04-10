@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: transcriptor
+      POSTGRES_PASSWORD: transcriptor
+      POSTGRES_DB: transcriptor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./server/src/main/scala/com/discordtranscriptor/db/migrations:/docker-entrypoint-initdb.d
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      PORT: 8080
+      DATABASE_URL: jdbc:postgresql://db:5432/transcriptor?user=transcriptor&password=transcriptor
+      JWT_SECRET: ${JWT_SECRET}
+      DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
+      DISCORD_CLIENT_SECRET: ${DISCORD_CLIENT_SECRET}
+      DISCORD_REDIRECT_URI: ${DISCORD_REDIRECT_URI}
+      CLAUDE_API_KEY: ${CLAUDE_API_KEY}
+    ports:
+      - "8080:8080"
+
+  client:
+    build: ./client
+    restart: unless-stopped
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:

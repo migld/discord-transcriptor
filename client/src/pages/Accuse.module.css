@@ -1,0 +1,77 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at center, #1a1008 0%, #0d0d0d 70%);
+}
+
+.card {
+  border: 1px solid var(--red);
+  background: var(--bg-card);
+  padding: 2.5rem 3rem;
+  max-width: 560px;
+  width: 90%;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: #cc4444;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: var(--text-dim);
+  margin-bottom: 2rem;
+  font-size: 0.85rem;
+}
+
+.suspects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.suspectCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.85rem 1.25rem;
+  text-align: left;
+  transition: all 0.15s;
+}
+.suspectCard:hover    { border-color: #cc4444; color: var(--text); }
+.suspectCard.selected { border-color: #cc4444; color: #cc4444; background: rgba(139,32,32,0.1); }
+
+.suspectName { font-size: 0.95rem; }
+.check       { font-size: 0.9rem; }
+
+.actions { display: flex; justify-content: space-between; gap: 1rem; }
+
+.backBtn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.6rem 1.25rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+.backBtn:hover { border-color: var(--text-dim); color: var(--text); }
+
+.accuseBtn {
+  background: transparent;
+  border: 1px solid #cc4444;
+  color: #cc4444;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  transition: background 0.2s;
+}
+.accuseBtn:hover:not(:disabled) { background: var(--red); color: var(--text); }
+.accuseBtn:disabled              { opacity: 0.4; cursor: not-allowed; }
